@@ -11,6 +11,8 @@ int main(int argc, char* argv[]) {
 	SDL_Event event;
 	while (running) {
 		while (SDL_PollEvent(&event)) {
+			// Log event timestamps in a `(minutes:seconds:milliseconds)` format
+			SDL_Log("Event (%u:%02u:%03u)", event.common.timestamp / 60'000, event.common.timestamp / 1000 % 60, event.common.timestamp % 1000);
 			if (event.type == SDL_QUIT) {
 				running = false;
 			}
