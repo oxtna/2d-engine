@@ -163,13 +163,16 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\Rect.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Entity.h" />
+    <ClInclude Include="include\IEntity.h" />
     <ClInclude Include="include\Window.h" />
+    <ClInclude Include="include\Vector2.h" />
+    <ClInclude Include="include\Rect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
