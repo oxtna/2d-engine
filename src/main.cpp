@@ -2,18 +2,17 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "Window.h"
-#include "Entity.h"
 
 int main(int argc, char* argv[]) {
 	if (SDL_Init(SDL_INIT_VIDEO)) {
-		SDL_LogCritical(SDL_LOG_CATEGORY_ERROR, "Unable to initialize SDL: %s", SDL_GetError());
+		SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
+			"Unable to initialize SDL: %s", SDL_GetError());
 	}
 	if (!IMG_Init(IMG_INIT_PNG)) {
-		SDL_LogCritical(SDL_LOG_CATEGORY_ERROR, "Unable to initialize SDL_image: %s", IMG_GetError());
+		SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
+			"Unable to initialize SDL_image: %s", IMG_GetError());
 	}
 	Window window("Window", 1080, 720);
-	SDL_Texture* texture = window.loadTexture("x.png");
-	Entity entity(0, 0, texture, 64, 64);
 	bool running = true;
 	SDL_Event event;
 	while (running) {
@@ -26,7 +25,6 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		window.clear();
-		window.render(&entity);
 		window.display();
 	}
 	SDL_Quit();
