@@ -12,10 +12,10 @@ class IEntity
 {
 public:
 	virtual ~IEntity() = default;
-	virtual EntityType getType() const = 0;
-	virtual Vector2 getPosition() const = 0;
-	virtual Vector2 getSize() const = 0;
-	virtual SDL_Texture* getTexture() const = 0;
-	virtual SDL_Rect getTextureRect() const = 0;
-	virtual bool checkCollision(const IEntity& other) const = 0;
+	virtual EntityType GetType() const = 0;
+	virtual Vector2 GetPosition() const = 0;
+	virtual Vector2 GetSize() const = 0;
+	virtual SDL_Texture* GetTexture() const = 0;
+	virtual SDL_Rect GetTextureRect() const = 0;
+	virtual bool CheckCollision(const IEntity& other) const = 0;
 };

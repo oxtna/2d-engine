@@ -10,8 +10,8 @@ private:
 public:
 	Window(const char* name, int w, int h);
 	~Window();
-	SDL_Texture* loadTexture(const char* filepath);
-	void clear();
-	void render(const IEntity& entity);
-	void display();
+	SDL_Texture* LoadTexture(const char* filepath);
+	void Clear();
+	void Render(const IEntity& entity);
+	void Display();
 };

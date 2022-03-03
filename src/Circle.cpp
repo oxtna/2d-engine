@@ -2,33 +2,33 @@
 
 Circle::Circle(Vector2 center, float radius, SDL_Texture* texture)
 	: _center(center), _radius(radius), _texture(texture),
-	_textureRect({ static_cast<int>(center.getX() - radius), static_cast<int>(center.getY() - radius),
+	_textureRect({ static_cast<int>(center.GetX() - radius), static_cast<int>(center.GetY() - radius),
 		static_cast<int>(radius * 2), static_cast<int>(radius * 2) }) {
 }
 
-EntityType Circle::getType() const {
+EntityType Circle::GetType() const {
 	return _type;
 }
 
-Vector2 Circle::getPosition() const {
-	return Vector2(_center.getX() - _radius, _center.getY() - _radius);
+Vector2 Circle::GetPosition() const {
+	return Vector2(_center.GetX() - _radius, _center.GetY() - _radius);
 }
 
-Vector2 Circle::getSize() const {
+Vector2 Circle::GetSize() const {
 	return Vector2(_radius * 2, _radius * 2);
 }
 
-SDL_Texture* Circle::getTexture() const {
+SDL_Texture* Circle::GetTexture() const {
 	return _texture;
 }
 
-SDL_Rect Circle::getTextureRect() const {
+SDL_Rect Circle::GetTextureRect() const {
 	return _textureRect;
 }
 
-bool Circle::checkCollision(const IEntity& other) const {
-	return (this->_center.getX() + this->_radius >= other.getPosition().getX() &&
-		this->_center.getX() - this->_radius <= other.getPosition().getX() + other.getSize().getX() &&
-		this->_center.getY() + this->_radius >= other.getPosition().getY() &&
-		this->_center.getY() - this->_radius <= other.getPosition().getY() + other.getSize().getY());
+bool Circle::CheckCollision(const IEntity& other) const {
+	return (this->_center.GetX() + this->_radius >= other.GetPosition().GetX() &&
+		this->_center.GetX() - this->_radius <= other.GetPosition().GetX() + other.GetSize().GetX() &&
+		this->_center.GetY() + this->_radius >= other.GetPosition().GetY() &&
+		this->_center.GetY() - this->_radius <= other.GetPosition().GetY() + other.GetSize().GetY());
 }

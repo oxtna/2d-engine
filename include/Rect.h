@@ -11,10 +11,10 @@ private:
 	SDL_Rect _textureRect;
 public:
 	Rect(Vector2 position, Vector2 size, SDL_Texture* texture);
-	EntityType getType() const override;
-	Vector2 getPosition() const override;
-	Vector2 getSize() const override;
-	SDL_Texture* getTexture() const override;
-	SDL_Rect getTextureRect() const override;
-	bool checkCollision(const IEntity& other) const override;
+	EntityType GetType() const override;
+	Vector2 GetPosition() const override;
+	Vector2 GetSize() const override;
+	SDL_Texture* GetTexture() const override;
+	SDL_Rect GetTextureRect() const override;
+	bool CheckCollision(const IEntity& other) const override;
 };

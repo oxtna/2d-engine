@@ -23,7 +23,7 @@ Window::~Window() {
 	}
 }
 
-SDL_Texture* Window::loadTexture(const char* filepath) {
+SDL_Texture* Window::LoadTexture(const char* filepath) {
 	SDL_Texture* texture = IMG_LoadTexture(_renderer, filepath);
 	if (texture == NULL) {
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR,
@@ -32,22 +32,22 @@ SDL_Texture* Window::loadTexture(const char* filepath) {
 	return texture;
 }
 
-void Window::clear() {
+void Window::Clear() {
 	if (SDL_RenderClear(_renderer)) {
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR,
 			"Unable to clear the rendering target: %s", SDL_GetError());
 	}
 }
 
-void Window::render(const IEntity& entity) {
-	SDL_Rect src = entity.getTextureRect();
+void Window::Render(const IEntity& entity) {
+	SDL_Rect src = entity.GetTextureRect();
 	SDL_Rect dst = src;
-	if (SDL_RenderCopy(_renderer, entity.getTexture(), &src, &dst)) {
+	if (SDL_RenderCopy(_renderer, entity.GetTexture(), &src, &dst)) {
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR,
 			"Unable to render a texture: %s", SDL_GetError());
 	}
 }
 
-void Window::display() {
+void Window::Display() {
 	SDL_RenderPresent(_renderer);
 }

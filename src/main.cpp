@@ -24,8 +24,8 @@ int main(int argc, char* argv[]) {
 				running = false;
 			}
 		}
-		window.clear();
-		window.display();
+		window.Clear();
+		window.Display();
 	}
 	SDL_Quit();
 	return 0;
