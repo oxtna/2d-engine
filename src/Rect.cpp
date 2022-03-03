@@ -6,6 +6,10 @@ Rect::Rect(Vector2 position, Vector2 size, SDL_Texture* texture)
 		static_cast<int>(size.getX()), static_cast<int>(size.getY()) }) {
 }
 
+EntityType Rect::getType() const {
+	return _type;
+}
+
 Vector2 Rect::getPosition() const {
 	return _position;
 }

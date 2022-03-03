@@ -163,12 +163,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Circle.cpp" />
     <ClCompile Include="src\Rect.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Circle.h" />
     <ClInclude Include="include\IEntity.h" />
     <ClInclude Include="include\Window.h" />
     <ClInclude Include="include\Vector2.h" />

@@ -4,12 +4,14 @@
 class Rect : public IEntity
 {
 private:
+	static const EntityType _type = EntityType::Rect;
 	Vector2 _position;
 	Vector2 _size;
 	SDL_Texture* _texture;
 	SDL_Rect _textureRect;
 public:
 	Rect(Vector2 position, Vector2 size, SDL_Texture* texture);
+	EntityType getType() const override;
 	Vector2 getPosition() const override;
 	Vector2 getSize() const override;
 	SDL_Texture* getTexture() const override;

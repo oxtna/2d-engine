@@ -6,6 +6,10 @@ Circle::Circle(Vector2 center, float radius, SDL_Texture* texture)
 		static_cast<int>(radius * 2), static_cast<int>(radius * 2) }) {
 }
 
+EntityType Circle::getType() const {
+	return _type;
+}
+
 Vector2 Circle::getPosition() const {
 	return Vector2(_center.getX() - _radius, _center.getY() - _radius);
 }
