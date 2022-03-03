@@ -35,10 +35,10 @@ void Window::clear() {
 	}
 }
 
-void Window::render(SDL_Texture* texture) {
-	SDL_Rect src = { 0, 0, 64, 64 };
-	SDL_Rect dst = { 100, 100, 64 * 2, 64 * 2 };
-	if (SDL_RenderCopy(m_renderer, texture, &src, &dst)) {
+void Window::render(Entity* entity) {
+	SDL_Rect src = entity->getBoundingBox();
+	SDL_Rect dst = src;
+	if (SDL_RenderCopy(m_renderer, entity->getTexture(), &src, &dst)) {
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Unable to render a texture: %s", SDL_GetError());
 	}
 }

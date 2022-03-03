@@ -1,5 +1,6 @@
 #pragma once
 #include "SDL2/SDL.h"
+#include "Entity.h"
 
 class Window
 {
@@ -11,6 +12,6 @@ public:
 	~Window();
 	SDL_Texture* loadTexture(const char* filepath);
 	void clear();
-	void render(SDL_Texture* texture);
+	void render(Entity* entity);
 	void display();
 };
