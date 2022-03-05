@@ -24,3 +24,9 @@ void EntityManager::CreateEntity(EntityType type) {
 		throw std::invalid_argument("Invalid entity type");
 	}
 }
+
+void EntityManager::Update() {
+	for (const auto& entity : _entityCollection) {
+		entity->Update();
+	}
+}

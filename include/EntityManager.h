@@ -12,4 +12,5 @@ public:
 	EntityManager();
 	// Create a dynamically allocated entity of the corresponding type
 	void CreateEntity(EntityType type);
+	void Update();
 };

@@ -19,7 +19,12 @@ App::~App() {
 
 void App::MainLoop() {
 	SDL_Event event;
+	Uint64 previousTime = SDL_GetTicks64();
+	Uint64 elapsedTime = 0;
 	while (_running) {
+		Uint64 currentTime = SDL_GetTicks64();
+		elapsedTime += currentTime - previousTime;
+		previousTime = currentTime;
 		while (SDL_PollEvent(&event)) {
 			// Log event timestamps in a `(minutes:seconds:milliseconds)` format
 			SDL_Log("Event (%u:%02u:%03u)", event.common.timestamp / 60'000,
@@ -28,7 +33,15 @@ void App::MainLoop() {
 				_running = false;
 			}
 		}
+		while (elapsedTime >= _updateTimeStep) {
+			_entityManager.Update();
+			elapsedTime -= _updateTimeStep;
+		}
 		_window.Clear();
 		_window.Display();
 	}
+}
+
+void App::LoadTextures(std::vector<const char*> filepaths) {
+
 }

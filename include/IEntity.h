@@ -21,4 +21,5 @@ public:
 	virtual SDL_Rect GetTextureRect() const = 0;
 	// Check collision using AABBs of the entities
 	virtual bool CheckCollision(const IEntity& other) const = 0;
+	virtual void Update() = 0;
 };

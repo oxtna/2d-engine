@@ -32,3 +32,6 @@ bool Rect::CheckCollision(const IEntity& other) const {
 		this->_position.GetY() + this->_size.GetY() >= other.GetPosition().GetY() &&
 		this->_position.GetY() <= other.GetPosition().GetY() + other.GetSize().GetY());
 }
+
+void Rect::Update() {
+}

@@ -32,3 +32,6 @@ bool Circle::CheckCollision(const IEntity& other) const {
 		this->_center.GetY() + this->_radius >= other.GetPosition().GetY() &&
 		this->_center.GetY() - this->_radius <= other.GetPosition().GetY() + other.GetSize().GetY());
 }
+
+void Circle::Update() {
+}

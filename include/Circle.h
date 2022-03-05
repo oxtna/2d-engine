@@ -17,4 +17,5 @@ public:
 	SDL_Texture* GetTexture() const override;
 	SDL_Rect GetTextureRect() const override;
 	bool CheckCollision(const IEntity& other) const override;
+	void Update() override;
 };
