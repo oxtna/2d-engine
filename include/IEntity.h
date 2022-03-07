@@ -16,5 +16,6 @@ public:
 	virtual EntityType GetEntityType() const = 0;
 	virtual Vector2 GetPosition() const = 0;
 	virtual SDL_Texture* GetTexture() const = 0;
+	// TODO: Change this to a scripting update
 	virtual void Update() = 0;
 };

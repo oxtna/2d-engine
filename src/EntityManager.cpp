@@ -4,7 +4,8 @@
 #include <stdexcept>
 
 EntityManager::EntityManager()
-	: _entityCollection(_defaultCollectionSize) {
+	: _entityCollection() {
+	_entityCollection.reserve(_defaultCollectionSize);
 }
 
 void EntityManager::CreateEntity(EntityType type) {
@@ -12,12 +13,12 @@ void EntityManager::CreateEntity(EntityType type) {
 	{
 	case EntityType::Rect:
 		_entityCollection.push_back(
-			std::make_shared<Rect>(Vector2(0, 0), Vector2(0, 0), nullptr)
+			std::make_shared<Rect>(0.0f, 0.0f, 0.0f, 0.0f, BodyType::Static, nullptr)
 		);
 		break;
 	case EntityType::Circle:
 		_entityCollection.push_back(
-			std::make_shared<Circle>(Vector2(0, 0), 0.0f, nullptr)
+			std::make_shared<Circle>(0.0f, 0.0f, 0.0f, BodyType::Static, nullptr)
 		);
 		break;
 	default:

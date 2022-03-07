@@ -1,15 +1,15 @@
 #include "Rect.h"
 
 Rect::Rect(Box box, BodyType bodyType, SDL_Texture* texture)
-	: _AABB(box), _bodyType(bodyType), _texture(texture) {
+	: _AABB(box), _bodyType(bodyType), _texture(texture), _velocity(0, 0) {
 }
 
 Rect::Rect(Vector2 position, Vector2 size, BodyType bodyType, SDL_Texture* texture)
-	: _AABB(position, size), _bodyType(bodyType), _texture(texture) {
+	: _AABB(position, size), _bodyType(bodyType), _texture(texture), _velocity(0, 0) {
 }
 
 Rect::Rect(float x, float y, float w, float h, BodyType bodyType, SDL_Texture* texture)
-	: _AABB(x, y, w, h), _bodyType(bodyType), _texture(texture) {
+	: _AABB(x, y, w, h), _bodyType(bodyType), _texture(texture), _velocity(0, 0) {
 }
 
 EntityType Rect::GetEntityType() const {
@@ -30,6 +30,14 @@ Vector2 Rect::GetSize() const {
 
 Vector2 Rect::GetCenter() const {
 	return _AABB.GetCenter();
+}
+
+Vector2 Rect::GetVelocity() const {
+	return _velocity;
+}
+
+void Rect::SetVelocity(Vector2 velocity) {
+	_velocity = velocity;
 }
 
 Box Rect::GetAABB() const {

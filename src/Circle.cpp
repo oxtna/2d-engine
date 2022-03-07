@@ -1,16 +1,17 @@
 #include "Circle.h"
 
 Circle::Circle(Box box, BodyType bodyType, SDL_Texture* texture)
-	: _AABB(box), _bodyType(bodyType), _texture(texture) {
+	: _AABB(box), _bodyType(bodyType), _texture(texture), _velocity(0, 0) {
 }
 
 Circle::Circle(Vector2 center, float radius, BodyType bodyType, SDL_Texture* texture)
 	: _AABB(center.GetX() - radius, center.GetY() - radius, radius * 2, radius * 2),
-	_bodyType(bodyType), _texture(texture) {
+	_bodyType(bodyType), _texture(texture), _velocity(0, 0) {
 }
 
 Circle::Circle(float x, float y, float radius, BodyType bodyType, SDL_Texture* texture)
-	: _AABB(x - radius, y - radius, radius * 2, radius * 2), _bodyType(bodyType), _texture(texture) {
+	: _AABB(x - radius, y - radius, radius * 2, radius * 2),
+	_bodyType(bodyType), _texture(texture), _velocity(0, 0) {
 }
 
 EntityType Circle::GetEntityType() const {
@@ -35,6 +36,14 @@ Vector2 Circle::GetSize() const {
 
 Vector2 Circle::GetCenter() const {
 	return _AABB.GetCenter();
+}
+
+Vector2 Circle::GetVelocity() const {
+	return _velocity;
+}
+
+void Circle::SetVelocity(Vector2 velocity) {
+	_velocity = velocity;
 }
 
 Box Circle::GetAABB() const {

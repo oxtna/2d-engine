@@ -7,6 +7,7 @@ class Rect : public IEntity, public IBody
 private:
 	static const EntityType _entityType = EntityType::Rect;
 	Box _AABB;
+	Vector2 _velocity;
 	const BodyType _bodyType;
 	SDL_Texture* _texture;
 public:
@@ -18,6 +19,8 @@ public:
 	Vector2 GetPosition() const override;
 	Vector2 GetSize() const override;
 	Vector2 GetCenter() const override;
+	Vector2 GetVelocity() const override;
+	void SetVelocity(Vector2 velocity) override;
 	Box GetAABB() const override;
 	SDL_Texture* GetTexture() const override;
 	bool CheckCollision(const IBody& other) const override;
