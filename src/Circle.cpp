@@ -1,36 +1,55 @@
 #include "Circle.h"
 
-Circle::Circle(Vector2 center, float radius, SDL_Texture* texture)
-	: _center(center), _radius(radius), _texture(texture),
-	_textureRect({ static_cast<int>(center.GetX() - radius), static_cast<int>(center.GetY() - radius),
-		static_cast<int>(radius * 2), static_cast<int>(radius * 2) }) {
+Circle::Circle(Box box, BodyType bodyType, SDL_Texture* texture)
+	: _AABB(box), _bodyType(bodyType), _texture(texture) {
 }
 
-EntityType Circle::GetType() const {
-	return _type;
+Circle::Circle(Vector2 center, float radius, BodyType bodyType, SDL_Texture* texture)
+	: _AABB(center.GetX() - radius, center.GetY() - radius, radius * 2, radius * 2),
+	_bodyType(bodyType), _texture(texture) {
+}
+
+Circle::Circle(float x, float y, float radius, BodyType bodyType, SDL_Texture* texture)
+	: _AABB(x - radius, y - radius, radius * 2, radius * 2), _bodyType(bodyType), _texture(texture) {
+}
+
+EntityType Circle::GetEntityType() const {
+	return _entityType;
+}
+
+BodyType Circle::GetBodyType() const {
+	return _bodyType;
+}
+
+float Circle::GetRadius() const {
+	return _AABB.GetW() / 2;
 }
 
 Vector2 Circle::GetPosition() const {
-	return Vector2(_center.GetX() - _radius, _center.GetY() - _radius);
+	return _AABB.GetPosition();
 }
 
 Vector2 Circle::GetSize() const {
-	return Vector2(_radius * 2, _radius * 2);
+	return _AABB.GetSize();
+}
+
+Vector2 Circle::GetCenter() const {
+	return _AABB.GetCenter();
+}
+
+Box Circle::GetAABB() const {
+	return _AABB;
 }
 
 SDL_Texture* Circle::GetTexture() const {
 	return _texture;
 }
 
-SDL_Rect Circle::GetTextureRect() const {
-	return _textureRect;
-}
-
-bool Circle::CheckCollision(const IEntity& other) const {
-	return (this->_center.GetX() + this->_radius >= other.GetPosition().GetX() &&
-		this->_center.GetX() - this->_radius <= other.GetPosition().GetX() + other.GetSize().GetX() &&
-		this->_center.GetY() + this->_radius >= other.GetPosition().GetY() &&
-		this->_center.GetY() - this->_radius <= other.GetPosition().GetY() + other.GetSize().GetY());
+bool Circle::CheckCollision(const IBody& other) const {
+	return (this->_AABB.GetX() + this->_AABB.GetW() >= other.GetAABB().GetX() &&
+		this->_AABB.GetX() <= other.GetAABB().GetX() + other.GetAABB().GetW() &&
+		this->_AABB.GetY() + this->_AABB.GetH() >= other.GetAABB().GetY() &&
+		this->_AABB.GetY() <= other.GetAABB().GetY() + other.GetAABB().GetH());
 }
 
 void Circle::Update() {

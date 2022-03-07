@@ -163,6 +163,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\Circle.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="src\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Box.h" />
     <ClInclude Include="include\EntityManager.h" />
     <ClInclude Include="include\App.h" />
     <ClInclude Include="include\Circle.h" />
@@ -179,6 +181,7 @@
     <ClInclude Include="include\Window.h" />
     <ClInclude Include="include\Vector2.h" />
     <ClInclude Include="include\Rect.h" />
+    <ClInclude Include="include\IBody.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
