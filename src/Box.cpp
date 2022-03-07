@@ -9,19 +9,19 @@ Box::Box(Vector2 position, Vector2 size)
 }
 
 float Box::GetX() const {
-	return _position.GetX();
+	return _position.X;
 }
 
 float Box::GetY() const {
-	return _position.GetY();
+	return _position.Y;
 }
 
 float Box::GetW() const {
-	return _size.GetX();
+	return _size.X;
 }
 
 float Box::GetH() const {
-	return _size.GetY();
+	return _size.Y;
 }
 
 Vector2 Box::GetPosition() const {
@@ -33,5 +33,5 @@ Vector2 Box::GetSize() const {
 }
 
 Vector2 Box::GetCenter() const {
-	return Vector2(_position.GetX() + _size.GetX() / 2, _position.GetY() + _size.GetY() / 2);
+	return Vector2(_position.X + _size.X / 2, _position.Y + _size.Y / 2);
 }

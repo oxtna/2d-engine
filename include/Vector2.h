@@ -2,13 +2,10 @@
 
 class Vector2
 {
-private:
-	float _x;
-	float _y;
 public:
+	float X;
+	float Y;
 	Vector2(float x, float y);
-	float GetX() const;
-	float GetY() const;
 	Vector2 operator+(const Vector2& other) const;
 	Vector2& operator+=(const Vector2& other);
 	Vector2 operator-(const Vector2& other) const;

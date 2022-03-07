@@ -5,7 +5,7 @@ Circle::Circle(Box box, BodyType bodyType, SDL_Texture* texture)
 }
 
 Circle::Circle(Vector2 center, float radius, BodyType bodyType, SDL_Texture* texture)
-	: _AABB(center.GetX() - radius, center.GetY() - radius, radius * 2, radius * 2),
+	: _AABB(center.X - radius, center.Y - radius, radius * 2, radius * 2),
 	_bodyType(bodyType), _texture(texture), _velocity(0, 0) {
 }
 
