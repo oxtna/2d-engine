@@ -40,7 +40,7 @@ void Window::Clear() {
 }
 
 void Window::Render(const IEntity& entity) {
-	SDL_Rect src = entity.GetTextureRect();
+	SDL_Rect src = {};
 	SDL_Rect dst = src;
 	if (SDL_RenderCopy(_renderer, entity.GetTexture(), &src, &dst)) {
 		SDL_LogError(SDL_LOG_CATEGORY_ERROR,
