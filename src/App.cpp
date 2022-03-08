@@ -2,7 +2,7 @@
 #include "SDL2/SDL_image.h"
 
 App::App(const char* name)
-	: _window(name, _windowWidth, _windowHeight) {
+	: _window(name, _windowWidth, _windowHeight), _renderer(_window.GetWindow()) {
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 	}
@@ -25,8 +25,8 @@ void App::MainLoop() {
 		previousTime = currentTime;
 		while (SDL_PollEvent(&event)) {
 			// Log event timestamps in a `(minutes:seconds:milliseconds)` format
-			//SDL_Log("Event (%u:%02u:%03u)", event.common.timestamp / 60'000,
-			//	event.common.timestamp / 1000 % 60, event.common.timestamp % 1000);
+			SDL_Log("Event (%u:%02u:%03u)", event.common.timestamp / 60'000,
+				event.common.timestamp / 1000 % 60, event.common.timestamp % 1000);
 			if (event.type == SDL_QUIT) {
 				_running = false;
 			}
@@ -35,15 +35,11 @@ void App::MainLoop() {
 			_entityManager.Update();
 			elapsedTime -= _updateTimeStep;
 		}
-		_window.Clear();
+		_renderer.Clear();
 		auto& entities = _entityManager.GetEntities();
 		for (const auto& entity : entities) {
-			_window.Render(*entity);
+			_renderer.RenderEntity(*entity);
 		}
-		_window.Display();
+		_renderer.Display();
 	}
-}
-
-void App::LoadTextures(std::vector<const char*> filepaths) {
-
 }
