@@ -4,12 +4,10 @@
 App::App(const char* name)
 	: _window(name, _windowWidth, _windowHeight) {
 	if (SDL_Init(SDL_INIT_VIDEO)) {
-		SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
-			"Unable to initialize SDL: %s", SDL_GetError());
+		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 	}
-	if (!IMG_Init(IMG_INIT_PNG)) {
-		SDL_LogCritical(SDL_LOG_CATEGORY_ERROR,
-			"Unable to initialize SDL_image: %s", IMG_GetError());
+	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+		SDL_Log("Unable to initialize SDL_image: %s", IMG_GetError());
 	}
 }
 
@@ -27,8 +25,8 @@ void App::MainLoop() {
 		previousTime = currentTime;
 		while (SDL_PollEvent(&event)) {
 			// Log event timestamps in a `(minutes:seconds:milliseconds)` format
-			SDL_Log("Event (%u:%02u:%03u)", event.common.timestamp / 60'000,
-				event.common.timestamp / 1000 % 60, event.common.timestamp % 1000);
+			//SDL_Log("Event (%u:%02u:%03u)", event.common.timestamp / 60'000,
+			//	event.common.timestamp / 1000 % 60, event.common.timestamp % 1000);
 			if (event.type == SDL_QUIT) {
 				_running = false;
 			}
@@ -38,6 +36,10 @@ void App::MainLoop() {
 			elapsedTime -= _updateTimeStep;
 		}
 		_window.Clear();
+		auto& entities = _entityManager.GetEntities();
+		for (const auto& entity : entities) {
+			_window.Render(*entity);
+		}
 		_window.Display();
 	}
 }

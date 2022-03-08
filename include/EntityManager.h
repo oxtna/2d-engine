@@ -11,6 +11,7 @@ private:
 public:
 	EntityManager();
 	// Create a dynamically allocated entity of the corresponding type
-	void CreateEntity(EntityType type);
+	void CreateEntity(EntityType type, SDL_Texture* texture);
+	const std::vector<std::shared_ptr<IEntity>>& GetEntities() const;
 	void Update();
 };

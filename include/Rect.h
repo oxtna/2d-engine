@@ -23,6 +23,7 @@ public:
 	void SetVelocity(Vector2 velocity) override;
 	Box GetAABB() const override;
 	SDL_Texture* GetTexture() const override;
+	SDL_Rect GetTextureFrame() const override;
 	bool CheckCollision(const IBody& other) const override;
 	void Update() override;
 };

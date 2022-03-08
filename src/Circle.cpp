@@ -54,6 +54,16 @@ SDL_Texture* Circle::GetTexture() const {
 	return _texture;
 }
 
+SDL_Rect Circle::GetTextureFrame() const {
+	SDL_Rect frame = {
+		static_cast<int>(_AABB.GetX()),
+		static_cast<int>(_AABB.GetY()),
+		static_cast<int>(_AABB.GetW()),
+		static_cast<int>(_AABB.GetH())
+	};
+	return frame;
+}
+
 bool Circle::CheckCollision(const IBody& other) const {
 	return (this->_AABB.GetX() + this->_AABB.GetW() >= other.GetAABB().GetX() &&
 		this->_AABB.GetX() <= other.GetAABB().GetX() + other.GetAABB().GetW() &&
