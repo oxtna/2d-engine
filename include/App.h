@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "Renderer.h"
 #include "EntityManager.h"
+#include "SceneNode.h"
 
 class App
 {
@@ -12,6 +13,7 @@ private:
 	Window _window;
 	Renderer _renderer;
 	EntityManager _entityManager;
+	SceneNode _sceneRoot;
 	bool _running = true;
 public:
 	App(const char* name);

@@ -2,7 +2,7 @@
 #include "SDL2/SDL_image.h"
 
 App::App(const char* name)
-	: _window(name, _windowWidth, _windowHeight), _renderer(_window.GetWindow()) {
+	: _window(name, _windowWidth, _windowHeight), _renderer(_window.GetWindow()), _sceneRoot(SceneNode::CreateRoot()) {
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 	}
@@ -27,6 +27,7 @@ void App::MainLoop() {
 			// Log event timestamps in a `(minutes:seconds:milliseconds)` format
 			SDL_Log("Event (%u:%02u:%03u)", event.common.timestamp / 60'000,
 				event.common.timestamp / 1000 % 60, event.common.timestamp % 1000);
+
 			if (event.type == SDL_QUIT) {
 				_running = false;
 			}
