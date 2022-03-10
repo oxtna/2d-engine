@@ -1,17 +1,17 @@
 #pragma once
-#include "IEntity.h"
+#include "Entity.h"
 #include <vector>
 #include <memory>
 
 class EntityManager
 {
 private:
-	const size_t _defaultCollectionSize = 256;
-	std::vector<std::shared_ptr<IEntity>> _entityCollection;
+	static const size_t _defaultCollectionSize = 256;
+	std::vector<std::weak_ptr<Entity>> _entityCollection;
 public:
 	EntityManager();
 	// Create a dynamically allocated entity of the corresponding type
-	void CreateEntity(EntityType type, SDL_Texture* texture);
-	const std::vector<std::shared_ptr<IEntity>>& GetEntities() const;
+	std::shared_ptr<Entity> CreateEntity(std::shared_ptr<Box> box, SDL_Texture* texture, SDL_Rect textureFrame);
+	const std::vector<std::weak_ptr<Entity>>& GetEntities() const;
 	void Update();
 };

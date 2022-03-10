@@ -1,6 +1,6 @@
 #pragma once
 #include "SDL2/SDL.h"
-#include "IEntity.h"
+#include "Entity.h"
 
 class Renderer
 {
@@ -13,6 +13,6 @@ public:
 	// Specified files should be in one of the formats initialized by the App object
 	SDL_Texture* LoadTexture(const char* filepath);
 	void Clear();
-	void RenderEntity(const IEntity& entity);
+	void RenderEntity(const Entity& entity);
 	void Display();
 };

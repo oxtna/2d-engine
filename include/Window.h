@@ -1,6 +1,5 @@
 #pragma once
 #include "SDL2/SDL.h"
-#include "IEntity.h"
 
 class Window
 {

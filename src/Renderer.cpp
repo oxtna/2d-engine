@@ -28,15 +28,15 @@ void Renderer::Clear() {
 	}
 }
 
-void Renderer::RenderEntity(const IEntity& entity) {
-	SDL_Rect src = entity.GetTextureFrame();
+void Renderer::RenderEntity(const Entity& entity) {
+	const SDL_Rect* const src = entity.GetTextureFrame();
 	SDL_Rect dst = {
 		static_cast<int>(entity.GetPosition().X),
 		static_cast<int>(entity.GetPosition().Y),
 		static_cast<int>(entity.GetSize().X),
 		static_cast<int>(entity.GetSize().Y)
 	};
-	if (SDL_RenderCopy(_renderer, entity.GetTexture(), &src, &dst)) {
+	if (SDL_RenderCopy(_renderer, entity.GetTexture(), src, &dst)) {
 		SDL_Log("Unable to render a texture: %s", SDL_GetError());
 	}
 }

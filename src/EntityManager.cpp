@@ -1,37 +1,30 @@
 #include "EntityManager.h"
-#include "Rect.h"
-#include "Circle.h"
 #include <stdexcept>
+#include <algorithm>
 
-EntityManager::EntityManager()
-	: _entityCollection() {
+EntityManager::EntityManager() {
 	_entityCollection.reserve(_defaultCollectionSize);
 }
 
-void EntityManager::CreateEntity(EntityType type, SDL_Texture* texture) {
-	switch (type)
-	{
-	case EntityType::Rect:
-		_entityCollection.push_back(
-			std::make_shared<Rect>(0.0f, 0.0f, 64.0f, 64.0f, BodyType::Static, texture)
-		);
-		break;
-	case EntityType::Circle:
-		_entityCollection.push_back(
-			std::make_shared<Circle>(0.0f, 0.0f, 0.0f, BodyType::Static, texture)
-		);
-		break;
-	default:
-		throw std::invalid_argument("Invalid entity type");
-	}
+std::shared_ptr<Entity> EntityManager::CreateEntity(std::shared_ptr<Box> box, SDL_Texture* texture, SDL_Rect textureFrame) {
+	auto entity = std::make_shared<Entity>(box, texture, textureFrame);
+	_entityCollection.push_back(entity);
+	return entity;
 }
 
-const std::vector<std::shared_ptr<IEntity>>& EntityManager::GetEntities() const {
+const std::vector<std::weak_ptr<Entity>>& EntityManager::GetEntities() const {
 	return _entityCollection;
 }
 
 void EntityManager::Update() {
-	for (const auto& entity : _entityCollection) {
-		entity->Update();
+	auto isExpired = [](const std::weak_ptr<Entity>& entity) {
+		return entity.expired();
+	};
+	auto& v = _entityCollection;
+	v.erase(std::remove_if(v.begin(), v.end(), isExpired), v.end());
+	for (auto it = v.begin(); it != v.end(); it++) {
+		if (auto entity = it->lock()) {
+			entity->Update();
+		}
 	}
 }
