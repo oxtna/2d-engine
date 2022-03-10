@@ -16,4 +16,5 @@ public:
 	Vector2 GetPosition() const;
 	Vector2 GetSize() const;
 	Vector2 GetCenter() const;
+	void Translate(Vector2 vec);
 };

@@ -35,3 +35,7 @@ Vector2 Box::GetSize() const {
 Vector2 Box::GetCenter() const {
 	return Vector2(_position.X + _size.X / 2, _position.Y + _size.Y / 2);
 }
+
+void Box::Translate(Vector2 vec) {
+	_position += vec;
+}
