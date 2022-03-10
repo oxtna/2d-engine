@@ -1,22 +1,9 @@
 #include "SceneNode.h"
 #include <algorithm>
-#include <iostream>
+#include <stdexcept>
 
 SceneNode::SceneNode(const std::shared_ptr<SceneNode>& parent)
 	: _parent(parent) {
-}
-
-SceneNode::SceneNode(const std::shared_ptr<SceneNode>& parent, const std::shared_ptr<IEntity>& entity)
-	: _parent(parent), _entity(entity) {
-}
-
-SceneNode::SceneNode(const std::shared_ptr<SceneNode>& parent, const std::shared_ptr<IBody>& body)
-	: _parent(parent), _body(body) {
-}
-
-SceneNode::SceneNode(const std::shared_ptr<SceneNode>& parent,
-	const std::shared_ptr<IEntity>& entity, const std::shared_ptr<IBody>& body)
-	: _parent(parent), _entity(entity), _body(body) {
 }
 
 SceneNode SceneNode::CreateRoot() {
@@ -25,6 +12,14 @@ SceneNode SceneNode::CreateRoot() {
 
 const std::vector<std::shared_ptr<SceneNode>>& SceneNode::GetChildren() const {
 	return _children;
+}
+
+std::shared_ptr<Entity> SceneNode::GetEntity() const {
+	return _entity;
+}
+
+std::shared_ptr<IBody> SceneNode::GetBody() const {
+	return _body;
 }
 
 std::shared_ptr<SceneNode> SceneNode::GetParent() const {
@@ -51,6 +46,43 @@ void SceneNode::Move(const std::shared_ptr<SceneNode>& parent) {
 		p->RemoveChild(*this);
 	}
 	_parent = parent;
+}
+
+void SceneNode::AddBox(Box box, EntityManager& entityManager, PhysicsManager& physicsManager) {
+	_box = std::make_shared<Box>(box);
+	if (_entity != nullptr) {
+		AddEntity(entityManager, _entity->GetTexture(), *_entity->GetTextureFrame());
+	}
+	if (_body != nullptr) {
+		AddBody(physicsManager, _body->GetBodyType(), _body->GetVelocity());
+	}
+}
+
+void SceneNode::AddEntity(EntityManager& entityManager, SDL_Texture* texture, SDL_Rect textureFrame) {
+	if (_box == nullptr) {
+		throw std::logic_error("SceneNode has no Box");
+	}
+	_entity = entityManager.CreateEntity(_box, texture, textureFrame);
+}
+
+void SceneNode::AddBody(PhysicsManager& physicsManager, BodyType bodyType, Vector2 velocity) {
+	if (_box == nullptr) {
+		throw std::logic_error("SceneNode has no Box");
+	}
+	switch (bodyType)
+	{
+	case BodyType::Static:
+		_body = physicsManager.CreateStaticBody(_box);
+		break;
+	case BodyType::Kinematic:
+		_body = physicsManager.CreateKinematicBody(_box, velocity);
+		break;
+	case BodyType::Dynamic:
+		_body = physicsManager.CreateDynamicBody(_box, velocity);
+		break;
+	default:
+		throw std::invalid_argument("Invalid body type");
+	}
 }
 
 std::vector<std::shared_ptr<SceneNode>>& SceneNode::_GetChildren() {
