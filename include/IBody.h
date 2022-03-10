@@ -1,5 +1,4 @@
 #pragma once
-#include "Vector2.h"
 #include "Box.h"
 
 enum class BodyType {
@@ -21,6 +20,5 @@ public:
 	virtual Box GetAABB() const = 0;
 	// Check collision using AABBs of the entities
 	virtual bool CheckCollision(const IBody& other) const = 0;
-	// TODO: Change this to a physics only update
-	virtual void Update() = 0;
+	virtual void UpdatePhysics(float deltaTime) = 0;
 };
