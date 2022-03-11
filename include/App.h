@@ -16,7 +16,6 @@ private:
 	EntityManager _entityManager;
 	PhysicsManager _physicsManager;
 	SceneNode _sceneRoot;
-	const Uint8* _keyboardState;
 	bool _running = true;
 public:
 	App(const char* name);

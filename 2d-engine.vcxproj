@@ -163,6 +163,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\DynamicBody.cpp" />
     <ClCompile Include="src\KinematicBody.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="include\SceneNode.h" />
     <ClInclude Include="include\StaticBody.h" />
     <ClInclude Include="include\KinematicBody.h" />
+    <ClInclude Include="include\InputManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="test\test.png" />

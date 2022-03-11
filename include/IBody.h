@@ -7,6 +7,7 @@ enum class BodyType {
 	Dynamic
 };
 
+// TODO: Add acceleration and friction
 class IBody
 {
 public:
